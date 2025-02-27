@@ -1,0 +1,451 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #13071D;
+  --background-secondary: #1E0B2F;
+  --foreground: #f8fafc;
+  --text-primary: #f0f9ff;
+  --text-secondary: #bae6fd;
+  --accent-purple: #a78bfa;
+  --accent-blue: #a78bfa;
+  --accent-pink: #f472b6;
+  
+  /* Font family variables */
+  --font-body: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-heading: var(--font-outfit), var(--font-body);
+  --font-mono: var(--font-space-grotesk), 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+  
+  /* Typography scale */
+  --fs-xs: clamp(0.75rem, 0.7vw, 0.875rem);
+  --fs-sm: clamp(0.875rem, 0.8vw, 1rem);
+  --fs-base: clamp(1rem, 1vw, 1.125rem);
+  --fs-lg: clamp(1.125rem, 1.2vw, 1.25rem);
+  --fs-xl: clamp(1.25rem, 1.5vw, 1.5rem);
+  --fs-2xl: clamp(1.5rem, 2vw, 1.875rem);
+  --fs-3xl: clamp(1.875rem, 2.5vw, 2.25rem);
+  --fs-4xl: clamp(2.25rem, 3vw, 3rem);
+  --fs-5xl: clamp(3rem, 4vw, 4rem);
+  
+  /* Line heights */
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+  --lh-loose: 1.75;
+  
+  /* Letter spacing */
+  --ls-tight: -0.025em;
+  --ls-normal: 0;
+  --ls-wide: 0.025em;
+  --ls-wider: 0.05em;
+  
+  /* Mobile viewport variables */
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --vh: 1vh; /* Default, will be updated by JS */
+}
+
+/* Add explicit background colors to html and body */
+html {
+  background-color: var(--background);
+  height: 100%;
+  /* Prevent content shift on mobile when address bar appears/disappears */
+  overflow-y: auto;
+  overscroll-behavior-y: none;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--background);
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  min-height: 100%;
+  /* Add padding for mobile safe areas */
+  padding: var(--sat) var(--sar) var(--sab) var(--sal);
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+h1 {
+  font-size: var(--fs-5xl);
+  letter-spacing: var(--ls-tight);
+}
+
+h2 {
+  font-size: var(--fs-4xl);
+}
+
+h3 {
+  font-size: var(--fs-3xl);
+}
+
+h4 {
+  font-size: var(--fs-2xl);
+}
+
+h5 {
+  font-size: var(--fs-xl);
+}
+
+h6 {
+  font-size: var(--fs-lg);
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Gradient text utility */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Updated cosmic particle animation with movement */
+@keyframes cosmic-particle {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  10% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(var(--travel-x, 100px), var(--travel-y, 50px)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--travel-x, 100px), var(--travel-y, 50px)) scale(0);
+  }
+}
+
+/* Updated trail animation */
+@keyframes cosmic-trail {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  10% {
+    width: 0;
+    opacity: 0;
+  }
+  20% {
+    width: 100%;
+    opacity: 0.8;
+  }
+  80% {
+    width: 100%;
+    opacity: 0.8;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+/* Cosmic glow pulse */
+@keyframes cosmic-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px 4px rgba(138, 43, 226, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px 8px rgba(138, 43, 226, 0.7);
+  }
+}
+
+/* Cosmic particle rotation */
+@keyframes cosmic-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Basic cosmic particle styles */
+.cosmic-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: white;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 0 6px 3px rgba(255, 255, 255, 0.6);
+  --travel-x: 100px;
+  --travel-y: 50px;
+}
+
+.cosmic-particle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 60px;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%);
+  transform: translateY(-50%);
+  transform-origin: left center;
+  opacity: 0;
+  filter: blur(0.5px);
+}
+
+.cosmic-particle.blue {
+  background: #60a5fa;
+  box-shadow: 0 0 6px 3px rgba(96, 165, 250, 0.6);
+}
+
+.cosmic-particle.blue::before {
+  background: linear-gradient(90deg, rgba(96,165,250,0.9) 0%, rgba(96,165,250,0) 100%);
+}
+
+.cosmic-particle.purple {
+  background: #a78bfa;
+  box-shadow: 0 0 6px 3px rgba(167, 139, 250, 0.6);
+}
+
+.cosmic-particle.purple::before {
+  background: linear-gradient(90deg, rgba(167,139,250,0.9) 0%, rgba(167,139,250,0) 100%);
+}
+
+.cosmic-particle.pink {
+  background: #f472b6;
+  box-shadow: 0 0 6px 3px rgba(244, 114, 182, 0.6);
+}
+
+.cosmic-particle.pink::before {
+  background: linear-gradient(90deg, rgba(244,114,182,0.9) 0%, rgba(244,114,182,0) 100%);
+}
+
+/* Remove old shooting star styles */
+.shooting-star {
+  display: none;
+}
+
+/* Twinkling stars animation */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.star.small {
+  width: 1px;
+  height: 1px;
+}
+
+.star.medium {
+  width: 2px;
+  height: 2px;
+  box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.1);
+}
+
+.star.large {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Updated shooting star styles */
+.shooting-star {
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  border-radius: 50%;
+  filter: blur(1px);
+  z-index: 10;
+  overflow: visible;
+  transform-origin: left center;
+}
+
+.shooting-star::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 6px 3px rgba(255, 255, 255, 0.8);
+}
+
+/* Add a meteor shower animation */
+@keyframes meteor-shower-bg {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Add a subtle background animation to enhance the space effect */
+.space-bg-animation {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 100%),
+    radial-gradient(2px 2px at 10% 90%, rgba(255, 255, 255, 0.05) 0%, transparent 100%),
+    radial-gradient(2px 2px at 90% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+  background-size: 200% 200%;
+  animation: meteor-shower-bg 60s linear infinite;
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Text color classes for dark mode */
+.text-adaptive-gray-300 {
+  color: #bae6fd;
+}
+
+.text-adaptive-gray-400 {
+  color: #93c5fd;
+}
+
+.text-adaptive-gray-500 {
+  color: #60a5fa;
+}
+
+.bg-adaptive-dark {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure main and all sections have the correct background */
+main, section {
+  background-color: var(--background);
+}
+
+/* Button styles with modern typography */
+.btn {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: var(--ls-wide);
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: white;
+  border: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Mobile viewport adjustments */
+@supports (padding: max(0px)) {
+  body {
+    padding-top: max(var(--sat), 0px);
+    padding-right: max(var(--sar), 0px);
+    padding-bottom: max(var(--sab), 0px);
+    padding-left: max(var(--sal), 0px);
+  }
+}
+
+/* Fix for iOS status bar */
+@media screen and (max-width: 768px) {
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top, 0px);
+    background-color: var(--background);
+    z-index: 100;
+  }
+  
+  /* Use custom viewport height variable */
+  .min-h-screen {
+    min-height: calc(100 * var(--vh));
+  }
+  
+  .h-screen {
+    height: calc(100 * var(--vh));
+  }
+  
+  /* Adjust font sizes for mobile */
+  h1 {
+    font-size: var(--fs-4xl);
+  }
+  
+  h2 {
+    font-size: var(--fs-3xl);
+  }
+  
+  h3 {
+    font-size: var(--fs-2xl);
+  }
+}
