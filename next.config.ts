@@ -15,7 +15,10 @@ const nextConfig: NextConfig = {
     ],
   },
   experimental: {
-    optimizeCss: true,
+    optimizeCss: {
+      // This uses critters to inline CSS
+      inlineThreshold: 3 * 1024, // 3kb
+    },
     optimizePackageImports: ['framer-motion', 'three', '@react-three/fiber', '@react-three/drei'],
   },
 };

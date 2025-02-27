@@ -324,7 +324,7 @@ export default function Header() {
     root: null, // Use the viewport as the root
     rootMargin: `-${headerHeight.current}px 0px 0px 0px`, // Adjust for header height
     threshold: [0.1, 0.5] // Trigger when 10% or 50% of the section is visible
-  }), [headerHeight.current]);
+  }), []);
 
   // Improved scroll spy with Intersection Observer
   useEffect(() => {
