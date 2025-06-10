@@ -82,16 +82,13 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-purple-200 md:text-right">
-              Email: <a href="mailto:kirisos.guna@example.com" className="hover:text-white transition-colors">kirisos.guna@example.com</a>
+              Email: <a href="m.gunamurugan2004@gmail.com" className="hover:text-white transition-colors">m.gunamurugan2004@gmail.com</a>
             </p>
           </div>
         </div>
         
         <div className="mt-12 pt-6 border-t border-purple-800/20 text-center text-purple-300/70 text-sm">
           <p>© {currentYear} Kirisos Guna. All rights reserved.</p>
-          <p className="mt-2">
-            Built with Next.js, TypeScript, and Tailwind CSS
-          </p>
         </div>
       </div>
     </footer>
